@@ -17,14 +17,13 @@ class InvoiceType extends AbstractType
     {
         $builder
             ->add('invoice_date' , DateType::class, ['attr' => ['class' => 'form-control']])
-            ->add('invoice_number' , NumberType::class, ['attr' => ['class' => 'form-control']])
             ->add('costumer_id' , NumberType::class, ['attr' => ['class' => 'form-control']])
             ->add('invoiceLines', CollectionType::class, [
                 'entry_type' => InvoiceLineType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
             ])
-            ->add('save', SubmitType::class, ['attr' => ['class' => 'btn btn-primary'], 'label' => 'submit'])
+            ->add('save', SubmitType::class, ['attr' => ['class' => 'btn btn-success mt-3 float-right'], 'label' => 'submit'])
         ;
     }
 

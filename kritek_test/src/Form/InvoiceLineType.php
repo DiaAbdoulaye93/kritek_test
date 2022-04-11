@@ -18,9 +18,8 @@ class InvoiceLineType extends AbstractType
             ->add('description', TextType::class, ['attr' => ['class' => 'form-control']])
             ->add('quantity', NumberType::class, ['attr' => ['class' => 'form-control']])
             ->add('amount', NumberType::class, ['attr' => ['class' => 'form-control']])
-            ->add('vat_amount', NumberType::class, ['attr' => ['class' => 'form-control']])
-            ->add('total_with_vat')
-            ->add('invoice_id');
+            ->add('vat_amount', NumberType::class, ['attr' => ['class' => 'form-control text-center', 'placeholder'=>'18%']])
+           ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
