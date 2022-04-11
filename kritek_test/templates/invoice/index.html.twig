@@ -9,25 +9,13 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Hello teste! ✅</h1>
 
     This friendly message is coming from:
    {{ form_start(form) }}
-    {{ form_row(form.dateFacture) }}
-    {{ form_row(form.customerId) }}
+    {{ form_row(form.invoice_date) }}
+    {{ form_row(form.costumer_id) }}
 
-    <h3>Lines</h3>
-    <div class="row invocelines" data-index="{{ form.invocelines|length > 0 ? form.invocelines|last.vars.name + 1 : 0 }}"
-    data-prototype="{{ form_widget(form.invocelines.vars.prototype)|e('html_attr') }}">
-        {% for line in form.invocelines %}
-            <div class="col-4">{{ form_row(line.description) }}</div>
-            <div class="col-4">{{ form_row(line.quantity) }}</div>
-            <div class="col-4">{{ form_row(line.amount) }}</div>
-        {% endfor %}
-        
-        
-    </div>
-    <button type="button" class="add_item_link btn btn-secondary" data-collection-holder-class="invocelines">Add a line</button>
 {{ form_end(form) }}
 </div>
 {% endblock %}
