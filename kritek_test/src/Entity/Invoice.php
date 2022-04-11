@@ -24,7 +24,7 @@ class Invoice
     #[ORM\Column(type: 'integer')]
     private $costumer_id;
 
-    #[ORM\OneToMany(mappedBy: 'invoice_id', targetEntity: InvoiceLine::class)]
+    #[ORM\OneToMany(mappedBy: 'invoice_id', targetEntity: InvoiceLine::class, cascade: ["persist"])]
     private $invoiceLines;
 
     public function __construct()

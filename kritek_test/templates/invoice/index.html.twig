@@ -10,6 +10,7 @@
    {{ form_start(form) }}
    <div class="row">
        <div class="col-2"> {{ form_row(form.invoice_date) }} </div>
+       <div class="col-2"> {{ form_row(form.invoice_number) }}</div>
        <div class="col-2"> {{ form_row(form.costumer_id) }}</div>
     </div>
     <div class="row invoiceLines" data-index="{{ form.invoiceLines|length > 0 ? form.invoiceLines|last.vars.name + 1 : 0 }}"

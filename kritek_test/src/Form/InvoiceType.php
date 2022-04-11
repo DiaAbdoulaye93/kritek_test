@@ -17,6 +17,7 @@ class InvoiceType extends AbstractType
     {
         $builder
             ->add('invoice_date' , DateType::class, ['attr' => ['class' => 'form-control']])
+            ->add('invoice_number' , NumberType::class, ['attr' => ['class' => 'form-control']])
             ->add('costumer_id' , NumberType::class, ['attr' => ['class' => 'form-control']])
             ->add('invoiceLines', CollectionType::class, [
                 'entry_type' => InvoiceLineType::class,
