@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class InvoiceController extends AbstractController
 {
-    #[Route('/invoice', name: 'app_invoice')]
+    #[Route('', name: 'app_invoice')]
     public function index(Request $request, ManagerRegistry $manageRegistery, InvoiceRepository $invoiceRepo): Response
     {
 
