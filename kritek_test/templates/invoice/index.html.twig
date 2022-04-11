@@ -28,8 +28,9 @@
 </div>
 
 
-<script type="text/javascript">
+<script type="text/javascript">  
                     const addFormToCollection = (e) => {
+                    
                     const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
                     console.log(collectionHolder.dataset.index);
                     const item = document.createElement("div");
@@ -47,12 +48,13 @@
                     for (var i = 0; i < el.children.length; i++) {
                         var child = el.children[i];
                         if (child.tagName == 'DIV') {
-                            child.classList.add('col-4');
+                            child.classList.add('col-md-4');
                         }
                     }
 
                     collectionHolder.dataset.index++;
                     };
+
                     document.querySelectorAll('.add_item_link').forEach(btn => {
                     btn.addEventListener("click", addFormToCollection);
                     

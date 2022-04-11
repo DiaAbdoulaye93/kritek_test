@@ -40,12 +40,18 @@ class InvoiceController extends AbstractController
                 $oneLine->setInvoice($invoice_id[0]);
                 $entityManager->persist($oneLine);
             }
-           if( $entityManager->flush()){
-            unset($form);
-            unset($invoice);
-            unset($invoiceLines);
+           if($entityManager->flush()){
+            return $this->redirect($request->getUri());
            }
+           unset($form);
+           unset($invoice);
+           unset($invoiceLines);
+           $invoice = new Invoice();
+           $line = new InvoiceLine();
+           $invoice->getInvoicelines()->add($line);
+           $form = $this->createForm(InvoiceType::class, $invoice);
         }
+        
         return $this->render('invoice/index.html.twig', [
             'form' => $form->createView(),
         ]);
