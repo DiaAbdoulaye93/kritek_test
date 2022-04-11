@@ -23,9 +23,7 @@ class InvoiceType extends AbstractType
                 'entry_type' => InvoiceLineType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
-            ])
-            ->add('save', SubmitType::class, ['attr' => ['class' => 'btn btn-success mt-3 float-right'], 'label' => 'submit'])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

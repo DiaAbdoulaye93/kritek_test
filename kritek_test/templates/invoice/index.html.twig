@@ -3,12 +3,14 @@
 {% block title %}Hello InvoiceController!{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>Hello teste! ✅</h1>
+<div class="card container mt-3 pb-4">
+  <div class="card-header text-center">
+     <h1>Symfony Kritek test ✅</h1>
+      
+  </div>
 
-    This friendly message is coming from:
    {{ form_start(form) }}
-   <div class="row">
+   <div class="row mt-4">
        <div class="col-2"> {{ form_row(form.invoice_date) }} </div>
        <div class="col-2"> {{ form_row(form.invoice_number) }}</div>
        <div class="col-2"> {{ form_row(form.costumer_id) }}</div>
@@ -23,7 +25,11 @@
         {% endfor %}
           
     </div>
-    <button type="button" class="add_item_link btn btn-success mt-4" data-collection-holder-class="invoiceLines">Add a line</button>
+    <button type="button" class="add_item_link btn btn-success mt-4" data-collection-holder-class="invoiceLines">new invoice line</button>
+       <div class="row d-flex justify-content-center">
+         <button type="reset" class="btn btn-danger col-md-3">Reset form</button>
+       <button type="submit" class="btn btn-success col-md-3 ml-1">Submit invoice</button>
+        </div>
 {{ form_end(form) }}
 </div>
 
