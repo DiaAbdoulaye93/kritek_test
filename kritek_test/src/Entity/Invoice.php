@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\InvoiceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: InvoiceRepository::class)]
@@ -21,6 +23,14 @@ class Invoice
 
     #[ORM\Column(type: 'integer')]
     private $costumer_id;
+
+    #[ORM\OneToMany(mappedBy: 'invoice_id', targetEntity: InvoiceLine::class)]
+    private $invoiceLines;
+
+    public function __construct()
+    {
+        $this->invoiceLines = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,6 +69,36 @@ class Invoice
     public function setCostumerId(int $costumer_id): self
     {
         $this->costumer_id = $costumer_id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, InvoiceLine>
+     */
+    public function getInvoiceLines(): Collection
+    {
+        return $this->invoiceLines;
+    }
+
+    public function addInvoiceLine(InvoiceLine $invoiceLine): self
+    {
+        if (!$this->invoiceLines->contains($invoiceLine)) {
+            $this->invoiceLines[] = $invoiceLine;
+            $invoiceLine->setInvoiceId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvoiceLine(InvoiceLine $invoiceLine): self
+    {
+        if ($this->invoiceLines->removeElement($invoiceLine)) {
+            // set the owning side to null (unless already changed)
+            if ($invoiceLine->getInvoiceId() === $this) {
+                $invoiceLine->setInvoiceId(null);
+            }
+        }
 
         return $this;
     }
