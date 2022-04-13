@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello InvoiceController!{% endblock %}
+
+{% block body %}
+<div class="card container mt-3 pb-4">
+  <div class="card-header text-center">
+     <h1>Symfony Kritek test ✅</h1>
+      
+  </div>
+
+   {{ form_start(form) }}
+   <div class="row mt-4">
+       <div class="col-2"> {{ form_row(form.invoice_date) }} </div>
+       <div class="col-2"> {{ form_row(form.invoice_number) }}</div>
+       <div class="col-2"> {{ form_row(form.costumer_id) }}</div>
+    </div>
+    <div class="row invoiceLines" data-index="{{ form.invoiceLines|length > 0 ? form.invoiceLines|last.vars.name + 1 : 0 }}"
+    data-prototype="{{ form_widget(form.invoiceLines.vars.prototype)|e('html_attr') }}">
+        {% for line in form.invoiceLines %}
+            <div class="col-6">{{ form_row(line.description) }}</div>
+            <div class="col-2">{{ form_row(line.quantity) }}</div>
+            <div class="col-2">{{ form_row(line.amount) }}</div>
+            <div class="col-2">{{ form_row(line.vat_amount) }}</div>
+        {% endfor %}
+          
+    </div>
+    <button type="button" class="add_item_link btn btn-success mt-4" data-collection-holder-class="invoiceLines">new invoice line</button>
+       <div class="row d-flex justify-content-center">
+         <button type="reset" class="btn btn-danger col-md-3">Reset form</button>
+       <button type="submit" class="btn btn-success col-md-3 ml-1">Submit invoice</button>
+        </div>
+{{ form_end(form) }}
+</div>
+
+
+<script type="text/javascript">  
+                    const addFormToCollection = (e) => {
+                    
+                    const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+                    console.log(collectionHolder.dataset.index);
+                    const item = document.createElement("div");
+
+                    item.innerHTML = collectionHolder
+                        .dataset
+                        .prototype
+                        .replace(
+                        /__name__/,
+                        collectionHolder.dataset.index
+                        );
+                    collectionHolder.appendChild(item);
+                    el = document.getElementById('invoice_form_invoicelines_' + collectionHolder.dataset.index);
+                    el.classList.add('row');
+                    for (var i = 0; i < el.children.length; i++) {
+                        var child = el.children[i];
+                        if (child.tagName == 'DIV') {
+                            child.classList.add('col-md-4');
+                        }
+                    }
+
+                    collectionHolder.dataset.index++;
+                    };
+
+                    document.querySelectorAll('.add_item_link').forEach(btn => {
+                    btn.addEventListener("click", addFormToCollection);
+                    
+                });
+            </script>
+{% endblock %}
